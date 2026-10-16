@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Цвета · необычные названия</title>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body>
+<!-- Заставка киоска: касание ведёт к выбору режима в режиме киоска (?kiosk) -->
+
+<div class="kiosk">
+  <header>
+    <div class="topbar">
+      <a class="text-btn" href="../menu.html">← Меню</a>
+    </div>
+    <p class="eyebrow">викторина о цвете</p>
+    <h1>Необычные <em>цвета</em></h1>
+    
+  </header>
+
+  <div class="divider"></div>
+
+  <main id="app">
+    <section class="screen attract" id="attract">
+      <div class="swatch-row" id="swatchRow"></div>
+      <span class="tap-hint">Коснитесь экрана, чтобы начать</span>
+    </section>
+  </main>
+
+  <footer>Необычные цвета · интерактивный макет</footer>
+</div>
+
+<script src="../js/utils.js"></script>
+<script src="../js/quiz/colors.js"></script>
+<script src="../js/quiz/core.js"></script>
+<script src="../js/quiz/attract.js"></script>
+</body>
+</html>

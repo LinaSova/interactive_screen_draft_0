@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Метод Прокудина-Горского</title>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/plates.css">
+</head>
+<body>
+
+<div class="kiosk" id="kiosk">
+  <header>
+    <div class="topbar">
+      <a class="text-btn" href="../menu.html">← Меню</a>
+      <div class="info-buttons">
+        <button class="text-btn" type="button" data-modal-open="rulesModal">Правила</button>
+        <button class="text-btn" type="button" data-modal-open="aboutModal">О технике</button>
+      </div>
+    </div>
+    <h1 class="game-title">Метод <em>Прокудина-Горского</em></h1>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- игра -->
+  <div class="screen" id="gameScreen">
+    <section class="block">
+      <div class="plates" id="plates"><div class="loading-note">Проявляю пластины…</div></div>
+    </section>
+
+    <section class="block">
+      <p class="question">Какая картинка получится, если совместить три проекции правильно?</p>
+      <div class="answers" id="answers"></div>
+    </section>
+
+    <div class="feedback-wrap" id="feedbackWrap">
+      <p class="feedback-text" id="feedbackText"></p>
+      <div class="next-btn-wrap" id="nextBtnWrap">
+        <button class="reset-btn" id="nextBtn" type="button">Следующий раунд →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- итоги после всех раундов -->
+  <section class="screen" id="finalScreen" hidden>
+    <p class="section-label">итоги игры</p>
+    <h2>Верно: <em id="finalScore"></em> из <span id="finalTotal"></span></h2>
+    <div class="final-list" id="finalList"></div>
+    <div class="actions">
+      <button class="reset-btn" id="restartBtn" type="button">Играть заново</button>
+    </div>
+  </section>
+
+  <p class="frame-counter" id="roundIndicator"></p>
+</div>
+
+<div class="modal-overlay" id="rulesModal" data-autoshow>
+  <div class="modal-box" role="dialog" aria-labelledby="rulesTitle">
+    <button class="modal-x" type="button" aria-label="Закрыть" data-modal-close>×</button>
+    <h2 id="rulesTitle">Правила</h2>
+    <p>Перед вами три чёрно-белые стеклянные пластины — один и тот же кадр, снятый через красный, зелёный и синий светофильтры.</p>
+    <p>Переключателем «негатив / позитив» под каждой пластиной можно посмотреть её проекцию. Ниже выберите, какая цветная картинка получится, если правильно совместить все три проекции.</p>
+    <p>После ответа пластины сойдутся в одну. В конце игры вы увидите итоги по всем кадрам.</p>
+    <div class="modal-actions"><button class="reset-btn" type="button" data-modal-close>Начать</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="aboutModal">
+  <div class="modal-box" role="dialog" aria-labelledby="aboutTitle">
+    <button class="modal-x" type="button" aria-label="Закрыть" data-modal-close>×</button>
+    <h2 id="aboutTitle">О технике</h2>
+    <p>Раздел находится в разработке. Здесь появится рассказ о методе цветной фотографии Прокудина-Горского.</p>
+    <figure class="modal-figure">
+      <img id="aboutPlateImg" alt="">
+      <figcaption>Оригинальная пластина · <span id="aboutPlateName"></span><br>три кадра одного сюжета, снятые через синий, зелёный и красный фильтры</figcaption>
+    </figure>
+  </div>
+</div>
+
+<script src="../js/utils.js"></script>
+<script src="../js/modal.js"></script>
+<script src="../js/plates.js"></script>
+</body>
+</html>

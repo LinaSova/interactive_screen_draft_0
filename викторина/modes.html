@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Викторина · Цвета</title>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/menu.css">
+</head>
+<body>
+
+<div class="kiosk">
+  <header>
+    <div class="topbar">
+      <a class="text-btn" href="../menu.html">← Назад</a>
+    </div>
+    <p class="eyebrow">викторина о цвете</p>
+    <h1>Викторина</h1>
+    <p class="frame-counter">&nbsp;</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <main id="app">
+    <section class="screen">
+      <div class="mode-grid">
+        <a class="mode-card" href="game-a.html" data-kiosk-link>
+          <div class="info"><h3>Угадай цвет по названию</h3></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="mode-card" href="game-b.html" data-kiosk-link>
+          <div class="info"><h3>Угадай название цвета</h3></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="mode-card" href="game-c.html" data-kiosk-link>
+          <div class="info"><h3>Соотнеси цвета и названия</h3></div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="../js/quiz/core.js"></script>
+</body>
+</html>

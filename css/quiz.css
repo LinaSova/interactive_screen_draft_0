@@ -1,0 +1,348 @@
+/* ===== ВИКТОРИНА «НЕОБЫЧНЫЕ ЦВЕТА» ===== */
+.cname{ text-transform:uppercase; }
+
+/* стимул */
+.stimulus{
+  position:relative;
+  width:100%;
+  border-radius:var(--radius);
+  border:1.5px solid var(--line);
+  background:var(--white);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:22px 18px;
+  min-height:clamp(120px,18vh,190px);
+  transition:background .5s ease, color .5s ease;
+}
+.stimulus .stim-name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:clamp(20px,3.4vw,32px);
+  line-height:1.15;
+  text-transform:uppercase;
+  letter-spacing:.01em;
+  word-break:break-word;
+}
+.stimulus.color-block{
+  border-color:var(--ink);
+  min-height:clamp(150px,24vh,260px);
+  padding:0;
+}
+/* варианты */
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(9px,1.6vw,15px);
+  width:100%;
+}
+.option-btn{
+  position:relative;
+  background:var(--white);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 14px 16px;
+  min-height:clamp(74px,10vh,104px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  font:inherit;
+  color:var(--ink);
+  transition:border-color .3s ease, box-shadow .3s ease, transform .15s ease, opacity .3s ease, filter .3s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.option-btn:not(.disabled):hover{
+  border-color:var(--ink);
+  transform:translateY(-2px);
+}
+.opt-letter{
+  position:absolute; top:0; left:0;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  font-weight:600;
+  color:var(--white);
+  background:var(--ink);
+  padding:2px 8px 3px;
+  z-index:2;
+}
+.opt-name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:clamp(13px,1.9vw,17px);
+  line-height:1.2;
+  text-transform:uppercase;
+  letter-spacing:.01em;
+  word-break:break-word;
+}
+.option-btn.swatch-option{
+  padding:0;
+  overflow:hidden;
+  aspect-ratio:16/10;
+  min-height:0;
+}
+.opt-swatch{
+  position:absolute; inset:0;
+}
+.option-btn.correct{
+  border-color:var(--good);
+  border-width:2.5px;
+  box-shadow:0 0 0 3px rgba(38,126,86,.16);
+}
+.option-btn.wrong{
+  border-color:var(--bad);
+  border-width:2.5px;
+  box-shadow:0 0 0 3px rgba(189,58,41,.14);
+}
+.option-btn.name-option{ transition:border-color .3s ease, box-shadow .3s ease, transform .15s ease, opacity .3s ease, filter .3s ease, background .5s ease, color .5s ease; }
+/* A: настоящее название ошибочно выбранного образца */
+.opt-reveal{
+  position:relative;
+  z-index:1;
+  padding:0 10px;
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:clamp(12px,1.7vw,15px);
+  line-height:1.2;
+  text-transform:uppercase;
+  word-break:break-word;
+}
+.option-btn.dim{ opacity:.36; filter:saturate(.5); }
+.option-btn.disabled{ pointer-events:none; }
+
+.feedback{
+  text-align:center;
+  min-height:2.6em;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+.feedback-text{ margin:0; }
+
+/* результаты и статистика */
+.result-list{
+  display:flex;
+  flex-direction:column;
+  border-top:1px solid var(--line);
+}
+.result-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:11px 4px;
+  border-bottom:1px solid var(--line);
+}
+.color-sample{
+  width:38px; height:38px;
+  border-radius:var(--radius);
+  border:1.5px solid var(--ink);
+  flex-shrink:0;
+}
+.result-text{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+.result-name{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:14px;
+  text-transform:uppercase;
+  line-height:1.2;
+  word-break:break-word;
+}
+.result-picked{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:9.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+}
+.mark{
+  font-family:'IBM Plex Mono', monospace;
+  font-weight:600;
+  font-size:18px;
+  flex-shrink:0;
+  width:24px;
+  text-align:center;
+}
+.mark.good{ color:var(--good); }
+.mark.bad{ color:var(--bad); }
+.empty-state{
+  font-family:'Newsreader', serif;
+  font-style:italic;
+  color:var(--ink-dim);
+  padding:20px;
+  text-align:center;
+}
+.note{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:9px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  text-align:center;
+  margin:0;
+}
+
+/* соотнеси (перетаскивание) */
+.drag-fish-wrapper{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(10px,2vw,18px);
+  justify-content:center;
+  min-height:78px;
+  align-items:center;
+}
+.drag-fish{
+  position:relative;
+  width:clamp(60px,10vw,84px);
+  aspect-ratio:1;
+  border-radius:var(--radius);
+  border:1.5px solid var(--ink);
+  cursor:grab;
+  touch-action:none;
+  flex-shrink:0;
+  transition:transform .15s ease, box-shadow .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.drag-fish:hover{ transform:translateY(-2px); }
+.drag-fish.selected{
+  transform:translateY(-3px);
+  box-shadow:0 0 0 3px var(--white), 0 0 0 5px var(--ink);
+}
+.drag-fish.dragging{ opacity:.4; }
+.drag-ghost{
+  position:fixed;
+  z-index:100;
+  pointer-events:none;
+  width:64px; height:64px;
+  border-radius:var(--radius);
+  border:1.5px solid var(--ink);
+  transform:translate(-50%,-50%);
+  box-shadow:0 6px 16px rgba(23,24,20,.25);
+}
+.placed-note{
+  font-family:'Newsreader', serif;
+  font-style:italic;
+  color:var(--ink-dim);
+  font-size:13px;
+}
+
+/* статистика за всё время: все цвета, угадали / ошиблись */
+.stats-lede{
+  font-family:'Newsreader', serif;
+  font-style:italic;
+  font-size:14px;
+  line-height:1.45;
+  color:var(--ink-dim);
+  text-align:center;
+  max-width:46ch;
+  margin:0 auto;
+}
+.stats-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:0 4px 6px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  border-bottom:1px solid var(--line);
+}
+.stats-head-name{ flex:1; padding-left:42px; }
+.stats-table .result-row{ padding:7px 4px; }
+.stats-table .color-sample{ width:28px; height:28px; }
+.stat-col{
+  width:68px;
+  flex-shrink:0;
+  text-align:center;
+}
+.result-row .stat-col{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:14px;
+  font-weight:600;
+}
+.stat-col.good{ color:var(--good); }
+.stat-col.bad{ color:var(--bad); }
+.result-row.in-round{ background:var(--white); }
+
+/* соотнеси: таблица «клетка для образца — название» */
+.match-table{
+  display:flex;
+  flex-direction:column;
+  border-top:1px solid var(--line);
+}
+.match-row{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:10px 6px;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  transition:background .2s ease;
+}
+.match-row.over{ background:var(--white); }
+.match-slot{
+  width:clamp(60px,10vw,84px);
+  aspect-ratio:1;
+  flex-shrink:0;
+  border:1.5px dashed var(--ink-faint);
+  border-radius:var(--radius);
+  display:flex;
+}
+.match-row.over .match-slot{ border-color:var(--ink); }
+.match-row.filled .match-slot{ border-color:transparent; }
+.match-slot .drag-fish{ width:100%; height:100%; }
+.match-name{
+  flex:1;
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:clamp(14px,2vw,18px);
+  line-height:1.2;
+  text-transform:uppercase;
+  word-break:break-word;
+}
+.drag-fish-wrapper.over{ outline:1.5px dashed var(--ink); outline-offset:4px; border-radius:var(--radius); }
+
+/* заставка киоска (0.html) */
+.attract{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:26px;
+  cursor:pointer;
+  text-align:center;
+}
+.swatch-row{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:8px;
+  width:min(100%, 420px);
+}
+.swatch-row span{
+  aspect-ratio:1;
+  border-radius:var(--radius);
+  border:1.5px solid var(--ink);
+}
+.tap-hint{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink);
+  border-bottom:1px solid var(--ink-dim);
+  padding-bottom:2px;
+  animation:blink 2.4s ease-in-out infinite;
+}
+@keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+
+@media (max-width:480px){
+  .options{ gap:8px; }
+  .option-btn{ padding:20px 8px 12px; }
+}

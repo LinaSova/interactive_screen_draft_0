@@ -1,0 +1,326 @@
+/* ===== ОБЩАЯ ТЕМА (как в «Точке совмещения») — подключается на всех страницах ===== */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,440;0,9..144,600;1,9..144,500&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#eef0e8;
+  --bg-deep:#dfe2d3;
+  --white:#fbfcf7;
+  --ink:#171814;
+  --ink-dim:#6c6f60;
+  --ink-faint:#a7ab98;
+  --line:#c6c9b7;
+  --r:#bd3a29;
+  --g:#267e56;
+  --b:#2c58a8;
+  --good:#267e56;
+  --bad:#bd3a29;
+  --good-bright:#1fa463;
+  --bad-bright:#e0321c;
+  --radius:3px;
+}
+*{box-sizing:border-box;}
+[hidden]{display:none !important;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 0%, var(--bg) 0%, var(--bg-deep) 100%);
+  color:var(--ink);
+  font-family:'Newsreader', serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:18px;
+  overflow-x:hidden;
+  touch-action:manipulation;
+}
+.kiosk{
+  position:relative;
+  width:min(100%, 900px);
+  aspect-ratio:1440/2560;
+  max-height:98vh;
+  display:flex;
+  flex-direction:column;
+  padding:clamp(18px,3.4vw,36px) clamp(16px,3vw,32px);
+  gap:clamp(11px,1.7vh,20px);
+  overflow:hidden;
+}
+
+/* ===== ШАПКА ===== */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.text-btn{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  background:none;
+  border:none;
+  padding:2px 0;
+  cursor:pointer;
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:color .2s ease, border-color .2s ease;
+  white-space:nowrap;
+}
+.text-btn:hover{ color:var(--ink); border-color:var(--ink-dim); }
+.text-btn.current{ color:var(--ink); border-color:var(--ink); cursor:default; }
+.info-buttons{ display:flex; gap:16px; }
+
+header{ text-align:center; flex:0 0 auto; }
+/* счётчик раундов внизу страницы: «01 / 05» */
+.frame-counter{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  text-align:center;
+  margin:0;
+  min-height:14px;
+  flex:0 0 auto;
+}
+.frame-counter b{ color:var(--ink); font-weight:600; }
+.frame-counter .dot{ margin:0 8px; color:var(--ink-faint); }
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:clamp(9px,1.1vw,10.5px);
+  letter-spacing:.24em;
+  color:var(--ink-dim);
+  text-transform:uppercase;
+  margin:0 0 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+.eyebrow::before,.eyebrow::after{
+  content:"+";
+  color:var(--ink-faint);
+  font-family:'IBM Plex Mono', monospace;
+}
+h1{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-optical-sizing:auto;
+  font-size:clamp(23px,3.8vw,36px);
+  line-height:1.08;
+  margin:0 0 10px;
+  color:var(--ink);
+  letter-spacing:-.01em;
+}
+h1 em, h2 em{
+  font-style:italic;
+  font-weight:500;
+  color:var(--r);
+}
+.lede{
+  font-family:'Newsreader', serif;
+  font-style:italic;
+  font-size:clamp(13px,1.85vw,16px);
+  line-height:1.45;
+  color:var(--ink-dim);
+  max-width:52ch;
+  margin:0 auto;
+}
+.divider{
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--line) 15%, var(--line) 85%, transparent);
+  flex:0 0 auto;
+}
+
+/* ===== ОСНОВНАЯ ОБЛАСТЬ И ЭКРАНЫ ===== */
+#app{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+}
+.screen{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(12px,2vh,20px);
+  flex:1 0 auto;
+}
+.section-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink-dim);
+  text-align:center;
+  margin:0;
+}
+h2{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:clamp(19px,2.8vw,26px);
+  line-height:1.15;
+  text-align:center;
+  margin:0;
+}
+.question{
+  font-family:'Newsreader', serif;
+  font-style:italic;
+  font-size:clamp(13px,2vw,16px);
+  text-align:center;
+  color:var(--ink);
+  margin:0;
+}
+
+/* ===== КНОПКИ ===== */
+.reset-btn, .btn-primary{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--white);
+  background:var(--ink);
+  border:1.5px solid var(--ink);
+  padding:11px 24px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  transition:background .2s ease, opacity .2s ease;
+}
+.reset-btn:hover, .btn-primary:hover{ background:#000; }
+.btn-primary:disabled{ opacity:.3; cursor:default; background:var(--ink); }
+.btn-secondary{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink);
+  background:var(--white);
+  border:1.5px solid var(--ink);
+  padding:11px 24px;
+  border-radius:var(--radius);
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  transition:background .2s ease;
+}
+.btn-secondary:hover{ background:var(--bg-deep); }
+.btn-secondary:disabled{ opacity:.3; cursor:default; background:var(--white); }
+.actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* ===== ОТВЕТ: ВЕРНО / НЕВЕРНО ===== */
+.feedback-text{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:clamp(16px,2.4vw,20px);
+}
+.feedback-text.good{ color:var(--good); }
+.feedback-text.bad{ color:var(--bad); }
+
+/* ===== МЕТКИ СОВМЕЩЕНИЯ ПО УГЛАМ ===== */
+.reg-mark{
+  position:absolute;
+  width:13px; height:13px;
+  z-index:3;
+  pointer-events:none;
+}
+.reg-mark::before,.reg-mark::after{
+  content:"";
+  position:absolute;
+  background:var(--ink);
+  opacity:.42;
+}
+.reg-mark::before{ left:50%; top:0; width:1px; height:100%; transform:translateX(-50%); }
+.reg-mark::after{ top:50%; left:0; height:1px; width:100%; transform:translateY(-50%); }
+.reg-tl{ top:4px; left:4px; }
+.reg-tr{ top:4px; right:4px; }
+.reg-bl{ bottom:4px; left:4px; }
+.reg-br{ bottom:4px; right:4px; }
+
+/* ===== ВСПЛЫВАЮЩЕЕ ОКНО (правила, «О технике») — см. js/modal.js ===== */
+.modal-overlay{
+  position:fixed; inset:0;
+  background:rgba(23,24,20,.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+  padding:20px;
+}
+.modal-overlay.show{ opacity:1; pointer-events:auto; }
+.modal-box{
+  position:relative;
+  width:min(100%, 440px);
+  max-height:80vh;
+  overflow-y:auto;
+  background:var(--white);
+  border:1.5px solid var(--ink);
+  border-radius:var(--radius);
+  padding:28px 24px 24px;
+  transform:translateY(10px);
+  transition:transform .3s ease;
+}
+.modal-overlay.show .modal-box{ transform:translateY(0); }
+.modal-box h2{
+  font-size:20px;
+  text-align:left;
+  margin:0 0 12px;
+}
+.modal-box p{
+  font-family:'Newsreader', serif;
+  font-size:15.5px;
+  line-height:1.55;
+  color:var(--ink-dim);
+  margin:0 0 10px;
+}
+.modal-actions{
+  display:flex;
+  justify-content:center;
+  margin-top:18px;
+}
+.modal-x{
+  position:absolute;
+  top:10px; right:10px;
+  width:28px; height:28px;
+  border:none;
+  background:none;
+  cursor:pointer;
+  color:var(--ink);
+  font-family:'IBM Plex Mono', monospace;
+  font-size:20px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  transition:background .2s ease;
+}
+.modal-x:hover{ background:var(--bg-deep); }
+
+footer{
+  margin-top:auto;
+  text-align:center;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:8px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  padding-top:4px;
+  flex:0 0 auto;
+}
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}

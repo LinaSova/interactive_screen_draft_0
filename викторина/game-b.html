@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Угадай название цвета · режим B</title>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body data-mode="B">
+
+<div class="kiosk">
+  <header>
+    <div class="topbar">
+      <a class="text-btn" href="modes.html" data-kiosk-link>← Меню</a>
+    </div>
+    <p class="eyebrow">викторина · режим B</p>
+    <h1>Угадай <em>название</em></h1>
+  </header>
+
+  <div class="divider"></div>
+
+  <main id="app">
+    <section class="screen" id="screenGame">
+      <div class="stimulus color-block" id="stimColor">
+        <span class="stim-name" id="stimReveal"></span>
+      </div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </section>
+    <!-- экраны итога и статистики добавляет js/quiz/results.js -->
+  </main>
+
+  <p class="frame-counter" id="roundIndicator"></p>
+</div>
+
+<div class="modal-overlay" id="rulesModal" data-autoshow>
+  <div class="modal-box" role="dialog" aria-labelledby="rulesTitle">
+    <button class="modal-x" type="button" aria-label="Закрыть" data-modal-close>×</button>
+    <h2 id="rulesTitle">Правила</h2>
+    <p>Перед вами образец цвета. Выберите из четырёх вариантов, как он называется, — подсказок нет.</p>
+    <p>В раунде 5 вопросов. После ответа на образце появится его правильное название, а если вы ошиблись — выбранный вариант окрасится в тот цвет, которому принадлежит его название.</p>
+    <div class="modal-actions"><button class="btn-primary" type="button" data-modal-close>Начать</button></div>
+  </div>
+</div>
+
+<script src="../js/utils.js"></script>
+<script src="../js/modal.js"></script>
+<script src="../js/quiz/colors.js"></script>
+<script src="../js/quiz/core.js"></script>
+<script src="../js/quiz/stats.js"></script>
+<script src="../js/quiz/results.js"></script>
+<script src="../js/quiz/game-choice.js"></script>
+</body>
+</html>
