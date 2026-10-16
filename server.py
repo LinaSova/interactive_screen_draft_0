@@ -4,7 +4,7 @@
 сколько раз каждый цвет угадали и сколько ошиблись — во всех режимах, за всё время.
 
 Запуск:  python server.py [порт]      (по умолчанию 8000)
-Затем откройте http://localhost:8000/menu.html
+Затем откройте http://localhost:8000/index.html
 """
 import json
 import os
@@ -76,7 +76,7 @@ if __name__ == '__main__':
         stream.reconfigure(errors='replace')
     # однопоточный сервер: запросы обрабатываются по очереди, файл статистики не пишется одновременно
     server = HTTPServer(('127.0.0.1', PORT), partial(Handler, directory=ROOT))
-    print(f'Киоск: http://localhost:{PORT}/menu.html   (статистика: {STATS_FILE})')
+    print(f'Киоск: http://localhost:{PORT}/index.html   (статистика: {STATS_FILE})')
     print('Остановить: Ctrl+C')
     try:
         server.serve_forever()
